@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./index.css";
+import "./style/Inputwithbutton.css";
 
 function InputWithButton(props) {
   const [inputValue, setInputValue] = useState("");
@@ -15,11 +15,7 @@ function InputWithButton(props) {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="form-container"
-      label="Ihre Sensor-Id"
-    >
+    <form onSubmit={handleSubmit} className="form-container">
       <input
         placeholder="Ihre Sensor-Id:"
         type="text"

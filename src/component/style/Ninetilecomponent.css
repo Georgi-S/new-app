@@ -1,0 +1,31 @@
+/* tiles */
+.nine-tile-component {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  .tiles-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 15px;
+  }
+  .tile {
+    width: 300px;
+    height: 200px;
+    background-color: #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    transition: all 0.5s ease-out;
+    cursor: pointer;
+  }
+  .content {
+    font-size: 20px;
+  }
+  @media screen and (max-width: 768px) {
+    .tiles-container {
+      transform: scale(0.8);
+    }
+  }
