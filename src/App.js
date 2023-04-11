@@ -2,16 +2,16 @@ import * as React from "react";
 import Header from "./component/Header";
 import Kacheln from "./component/Kacheln";
 import Main from "./component/Main";
-import Textfield from "./component/Textfield";
+import InputWithButton from "./component/Inputwithbutton";
 import "./component/index.css";
 
 function App() {
   let name = "Dashboard";
+
   return (
     <div className="center container">
       <Header name={name} />
-      <Textfield />
-      <Main />
+      <InputWithButton />
       <Kacheln />
     </div>
   );
