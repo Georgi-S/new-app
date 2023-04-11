@@ -1,0 +1,21 @@
+.header{
+  color: rgb(194, 161, 32);
+  text-decoration: underline;
+}
+
+ .main{
+  width: 40%;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  border: solid rgb(22, 98, 160);
+  padding: inherit;
+}
+
+.center{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.checkbox{
+  position: relative;
+} 
