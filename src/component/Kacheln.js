@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./style/Ninetilecomponent.css";
 
-function NineTileComponent() {
+function Kacheln(props) {
   const colors = [
     "#B5EAD7",
     "#F7E1C5",
@@ -15,18 +15,47 @@ function NineTileComponent() {
   ];
 
   const [hoveredIndex, setHoveredIndex] = useState(null);
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    if (props.id === "") {
+      return;
+    }
+
+    console.log("https://api.opensensemap.org/boxes/" + props.id);
+    fetch("https://api.opensensemap.org/boxes/" + props.id)
+      .then((response) => response.json())
+      .then((data) => setData(data.sensors))
+      .catch((error) => console.log(error));
+  }, [props]);
 
   const handleHover = (index) => {
     setHoveredIndex(index);
   };
 
-  const tiles = colors.map((color, index) => {
+  if (data.length === 0) {
+    return (
+      <div
+        className="tile"
+        style={{
+          backgroundColor: colors[0 % colors.length],
+          transform: 0 ? "scale(1.4)" : "scale(1)",
+          zIndex: 0 ? 1 : 0,
+        }}
+      >
+        <div className="content">Keine Daten</div>
+      </div>
+    );
+  }
+
+  const tiles = data.map((sensor, index) => {
     const isHovered = index === hoveredIndex;
     const tileStyles = {
-      backgroundColor: color,
+      backgroundColor: colors[index % colors.length],
       transform: isHovered ? "scale(1.4)" : "scale(1)",
       zIndex: isHovered ? 1 : 0,
     };
+
     return (
       <div
         className="tile"
@@ -35,7 +64,12 @@ function NineTileComponent() {
         onMouseEnter={() => handleHover(index)}
         onMouseLeave={() => handleHover(null)}
       >
-        <div className="content">Kachel {index + 1}</div>
+        <div className="content">
+          <h2>{sensor.title}</h2>
+          <p>
+            {sensor.lastMeasurement.value} {sensor.unit}
+          </p>
+        </div>
       </div>
     );
   });
@@ -47,4 +81,4 @@ function NineTileComponent() {
   );
 }
 
-export default NineTileComponent;
+export default Kacheln;
